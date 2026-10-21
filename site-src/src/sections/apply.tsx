@@ -19,15 +19,12 @@ function TallyForm() {
     const frame = ref.current;
     if (!frame || PREVIEW) return;
     const load = () => {
-      const run = () => (window.Tally ? window.Tally.loadEmbeds() : (frame.src = SITE.tallyEmbed));
-      if (window.Tally) return run();
+      // l'iframe reçoit son adresse directement ; le script Tally ne sert qu'à ajuster la hauteur
+      frame.src = SITE.tallyEmbed;
+      if (window.Tally) return;
       const s = document.createElement("script");
       s.src = "https://tally.so/widgets/embed.js";
-      s.onload = run;
-      s.onerror = () => {
-        frame.src = SITE.tallyEmbed;
-        setFailed(false);
-      };
+      s.onload = () => window.Tally?.loadEmbeds();
       document.body.appendChild(s);
     };
     if (!("IntersectionObserver" in window)) return load();
