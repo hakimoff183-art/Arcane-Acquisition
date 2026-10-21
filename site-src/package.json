@@ -1,0 +1,18 @@
+{
+  "name": "arcane-acquisition-site",
+  "private": true,
+  "type": "module",
+  "description": "Landing Arcane Acquisition : React 19 + Tailwind CSS v4 + composants Magic UI, rendue en HTML statique.",
+  "scripts": {
+    "site": "node build.mjs && cp -r dist/. ..",
+    "preview": "node build.mjs --preview"
+  },
+  "devDependencies": {
+    "clsx": "2.1.1",
+    "esbuild": "0.28.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "tailwind-merge": "3.6.0",
+    "tailwindcss": "4.3.3"
+  }
+}
