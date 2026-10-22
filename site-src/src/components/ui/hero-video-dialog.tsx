@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
+import { OPEN_VIDEO } from "@/lib/video";
 
 // Magic UI — HeroVideoDialog (API de @magicui/hero-video-dialog).
 // Fenêtre native <dialog> : focus piégé, touche Échap, et la vidéo ne se charge qu'au clic.
@@ -53,11 +54,14 @@ export function HeroVideoDialog({
     };
     d.addEventListener("close", onClose);
     d.addEventListener("click", onClick);
+    // les autres boutons « Voir la vidéo » de la page (openVideo) ouvrent cette même fenêtre
+    window.addEventListener(OPEN_VIDEO, show);
     return () => {
       d.removeEventListener("close", onClose);
       d.removeEventListener("click", onClick);
+      window.removeEventListener(OPEN_VIDEO, show);
     };
-  }, []);
+  }, [show]);
 
   const Trigger = !embedAllowed && fallbackHref ? "a" : "button";
 

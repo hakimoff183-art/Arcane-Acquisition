@@ -4,7 +4,7 @@ import { AnimatedBeam } from "@/components/ui/animated-beam";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
-import { Icon, Logo } from "@/components/brand";
+import { Eyebrow, Icon, Logo } from "@/components/brand";
 
 const Node = forwardRef<HTMLDivElement, { children: ReactNode; label: string; sub?: string; big?: boolean; accent?: boolean }>(
   ({ children, label, sub, big, accent }, ref) => (
@@ -87,8 +87,8 @@ export function Process() {
       <div className="wrap">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center lg:gap-20">
           <BlurFade inView direction="up">
-            <p className="label-mono text-fog-2">Comment ça marche</p>
-            <h2 className="mt-4 font-display text-[clamp(2.3rem,5.2vw,4.4rem)] leading-[0.98] font-bold tracking-[-0.045em]">
+            <Eyebrow step={4} tone="dark">Comment ça marche</Eyebrow>
+            <h2 className="display-section mt-4">
               Trois étapes.
               <br />
               Aucun appel.

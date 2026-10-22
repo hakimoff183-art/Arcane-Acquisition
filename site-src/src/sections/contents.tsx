@@ -3,7 +3,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { MagicCard } from "@/components/ui/magic-card";
 import { TypingAnimation } from "@/components/ui/typing-animation";
-import { Icon, SignalSquare } from "@/components/brand";
+import { CheckBadge, Eyebrow, Icon, SignalSquare } from "@/components/brand";
 
 const MESSAGE =
   "« Bonjour Claire, j'ai vu que vous recrutez votre premier responsable acquisition. Félicitations pour la croissance. J'ai repéré 3 sujets sur lesquels vos concurrents se positionnent déjà sur Google. Je vous les envoie ? »";
@@ -48,9 +48,7 @@ function Fiche() {
       <footer className="flex flex-wrap gap-x-6 gap-y-2 border-t border-line bg-paper/60 px-6 py-4 text-[0.88rem] text-ink-2 md:px-7">
         {["Signal daté et sourcé", "Décideur identifié", "Deux messages prêts"].map((t) => (
           <span key={t} className="inline-flex items-center gap-2">
-            <span aria-hidden className="flex size-4.5 items-center justify-center rounded-[5px] bg-ink text-paper">
-              <Icon.Check className="size-3" />
-            </span>
+            <CheckBadge className="size-5" />
             {t}
           </span>
         ))}
@@ -100,8 +98,8 @@ export function Contents() {
     <section id="radar" className="pb-24 md:pb-32">
       <div className="wrap">
         <BlurFade inView direction="up" className="max-w-[46rem]">
-          <p className="label-mono text-ink-3">Le livrable</p>
-          <h2 className="mt-4 font-display text-[clamp(2.1rem,4.6vw,3.8rem)] leading-[1] font-bold tracking-[-0.045em]">
+          <Eyebrow step={3}>Le livrable</Eyebrow>
+          <h2 className="display-section mt-4">
             Ce que contient ton Radar.
           </h2>
           <p className="mt-5 text-[1.1rem] leading-relaxed text-ink-2 md:text-[1.2rem]">

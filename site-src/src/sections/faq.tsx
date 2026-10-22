@@ -1,4 +1,5 @@
 import { BlurFade } from "@/components/ui/blur-fade";
+import { Eyebrow } from "@/components/brand";
 
 const FAQ = [
   [
@@ -25,8 +26,8 @@ export function Faq() {
     <section id="questions" className="pb-24 md:pb-32">
       <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
         <BlurFade inView direction="up" className="lg:sticky lg:top-28 lg:self-start">
-          <p className="label-mono text-ink-3">Questions</p>
-          <h2 className="mt-4 font-display text-[clamp(2.1rem,4.6vw,3.8rem)] leading-[1] font-bold tracking-[-0.045em]">
+          <Eyebrow step={6}>Questions</Eyebrow>
+          <h2 className="display-section mt-4">
             Les questions qu'on nous pose.
           </h2>
         </BlurFade>

@@ -25,6 +25,10 @@
   --color-fog: #B8B1A5;
   --color-fog-2: #8F887D;
 
+  /* deux ombres seulement : posé (cartes) et flottant (les grandes pièces de démonstration) */
+  --shadow-card: 0 1px 0 rgb(26 26 26 / 0.03), 0 12px 28px -20px rgb(26 26 26 / 0.3);
+  --shadow-float: 0 1px 0 rgb(26 26 26 / 0.04), 0 30px 60px -30px rgb(26 26 26 / 0.35), 0 80px 140px -70px rgb(26 26 26 / 0.25);
+
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
@@ -116,6 +120,35 @@
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "case", "tnum";
+}
+
+/* ------------------------------------------------------------------ échelle des titres
+   Trois tailles pour toute la page : le titre du haut, les titres de section, les sous-titres. */
+@utility display-hero {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.75rem, 8.2vw, 7.1rem);
+  line-height: 0.94;
+  letter-spacing: -0.042em;
+}
+@utility display-section {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4.8vw, 4.1rem);
+  line-height: 1;
+  letter-spacing: -0.036em;
+}
+@utility display-sub {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.55rem, 2.8vw, 2.3rem);
+  line-height: 1.12;
+  letter-spacing: -0.026em;
+}
+@utility lead {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  @media (min-width: 768px) { font-size: 1.2rem; }
 }
 
 /* ------------------------------------------------------------------ Magic UI : blur-fade (sans motion) */

@@ -210,7 +210,7 @@ export function Hero() {
         </p>
 
         <h1
-          className="rise mt-6 font-display text-[clamp(2.75rem,8.2vw,7.1rem)] leading-[0.93] font-extrabold tracking-[-0.052em] text-ink md:mt-8"
+          className="rise display-hero mt-6 text-ink md:mt-8"
           style={{ "--d": "0.08s" } as CSSProperties}
         >
           10 prospects chauds.

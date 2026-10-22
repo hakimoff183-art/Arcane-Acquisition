@@ -1,5 +1,5 @@
 import { BlurFade } from "@/components/ui/blur-fade";
-import { SignalSquare } from "@/components/brand";
+import { Eyebrow, SignalSquare } from "@/components/brand";
 
 // Illustration : un an d'une agence qui vit de recommandations (août creux, rentrée forte).
 const MONTHS = [
@@ -57,7 +57,8 @@ export function Problem() {
       <div className="wrap">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-20">
           <BlurFade inView direction="up">
-            <h2 className="font-display text-[clamp(2.3rem,5.2vw,4.4rem)] leading-[0.98] font-bold tracking-[-0.045em]">
+            <Eyebrow step={1}>Le constat</Eyebrow>
+            <h2 className="display-section mt-4">
               Un mois plein.
               <br />
               Puis plus rien.
@@ -74,8 +75,8 @@ export function Problem() {
 
         <div className="mt-24 md:mt-32">
           <BlurFade inView direction="up">
-            <p className="label-mono text-ink-3">Le signal d'achat</p>
-            <h3 className="mt-4 max-w-[22em] font-display text-[clamp(1.6rem,3vw,2.4rem)] leading-[1.12] font-bold tracking-[-0.03em]">
+            <Eyebrow>Le signal d'achat</Eyebrow>
+            <h3 className="display-sub mt-4 max-w-[22em]">
               Le bon prospect n'est pas celui qui ressemble à ta cible. C'est celui qui a besoin de toi cette semaine.{" "}
               <span className="text-ink-3">Et ça se voit.</span>
             </h3>

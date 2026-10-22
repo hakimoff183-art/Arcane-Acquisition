@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { Icon } from "@/components/brand";
+import { CheckBadge, Eyebrow, Icon } from "@/components/brand";
 import { PREVIEW, SITE } from "@/config";
 
 declare global {
@@ -95,8 +95,8 @@ export function Apply() {
     <section id="formulaire" className="border-t border-line bg-paper-2 py-24 md:py-32">
       <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
         <BlurFade inView direction="up" className="lg:sticky lg:top-28 lg:self-start">
-          <p className="label-mono text-ink-3">Ta demande</p>
-          <h2 className="mt-4 font-display text-[clamp(2.3rem,5.2vw,4.4rem)] leading-[0.98] font-bold tracking-[-0.045em]">
+          <Eyebrow step={7}>Ta demande</Eyebrow>
+          <h2 className="display-section mt-4">
             Reçois tes 10 prospects sous 72&nbsp;h.
           </h2>
           <p className="mt-6 max-w-[30em] text-[1.1rem] leading-relaxed text-ink-2 md:text-[1.2rem]">
@@ -105,9 +105,7 @@ export function Apply() {
           <ul className="mt-8 grid gap-3.5">
             {DEAL.map((d) => (
               <li key={d} className="flex items-center gap-3.5 text-[1.02rem] font-medium">
-                <span aria-hidden className="flex size-6 shrink-0 items-center justify-center rounded-md bg-ink text-paper">
-                  <Icon.Check />
-                </span>
+                <CheckBadge />
                 {d}
               </li>
             ))}

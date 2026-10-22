@@ -1,7 +1,7 @@
 import { BlurFade } from "@/components/ui/blur-fade";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
-import { Logo } from "@/components/brand";
+import { Eyebrow, Logo } from "@/components/brand";
 import { PREVIEW, SITE } from "@/config";
 
 function Thumbnail() {
@@ -35,9 +35,12 @@ export function Video() {
     <section className="pb-24 md:pb-32">
       <div className="wrap">
         <BlurFade inView direction="up" className="mb-10 flex flex-wrap items-end justify-between gap-4 md:mb-12">
-          <h2 className="font-display text-[clamp(2.1rem,4.6vw,3.8rem)] leading-[1] font-bold tracking-[-0.045em]">
-            Un Radar, expliqué en 3&nbsp;minutes.
-          </h2>
+          <div>
+            <Eyebrow step={2}>La vidéo</Eyebrow>
+            <h2 className="display-section mt-4">
+              Un Radar, expliqué en 3&nbsp;minutes.
+            </h2>
+          </div>
           <p className="text-[1rem] text-ink-3">Comment on repère les signaux, et ce que tu reçois.</p>
         </BlurFade>
         <BlurFade inView direction="up" delay={0.08}>
