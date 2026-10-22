@@ -76,7 +76,7 @@ function Mechanism() {
 }
 
 const STEPS = [
-  { n: "01", stat: 2, unit: "min", title: "Tu remplis le formulaire", text: "Ton agence, ton offre, ton client idéal et ta zone." },
+  { n: "01", stat: 8, unit: "min", title: "Tu remplis le formulaire", text: "Ton agence, ton offre, ton client idéal et ta zone." },
   { n: "02", stat: 10, unit: "prospects", title: "On construit ton Radar", text: "On repère les signaux sur ton marché, on identifie chaque décideur et on écrit les messages." },
   { n: "03", stat: 72, unit: "h", title: "Tu le reçois par email", text: "Tes 10\u00A0prospects, leurs messages et la carte de ton marché." },
 ];

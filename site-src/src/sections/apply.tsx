@@ -135,7 +135,7 @@ export function Apply() {
           {/* sur téléphone, marges réduites : le formulaire garde toute la largeur possible */}
           <div className="relative rounded-[28px] bg-card px-4 pt-6 pb-4 shadow-float ring-1 ring-line sm:p-8 md:p-10">
             <h3 className="font-display text-[1.45rem] leading-tight font-bold tracking-[-0.025em] md:text-[1.6rem]">Ta demande de Radar</h3>
-            <p className="mt-1 mb-5 text-[0.95rem] text-ink-3 md:mt-1.5 md:mb-6">2 minutes. Les réponses servent à construire ton Radar.</p>
+            <p className="mt-1 mb-5 text-[0.95rem] text-ink-3 md:mt-1.5 md:mb-6">Environ 8 minutes. Les réponses servent à construire ton Radar.</p>
             <TallyForm />
             <BorderBeam size={240} duration={14} colorFrom="#FF6600" colorTo="#FFC7A1" borderWidth={1.5} delay={4} />
           </div>

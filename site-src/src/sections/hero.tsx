@@ -269,7 +269,7 @@ export function Hero() {
               <VideoTrigger className="w-full sm:w-auto" />
             </div>
             <p className="mt-4 text-[0.9rem] text-ink-3 xl:mt-3.5">
-              Un formulaire de 2 minutes. <br className="sm:hidden" />
+              Un formulaire d'environ 8 minutes. <br className="sm:hidden" />
               Aucun appel, aucune carte bancaire.
             </p>
           </div>
