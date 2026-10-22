@@ -9,11 +9,28 @@ on n'édite pas `index.html` à la main.
   puis devient interactive).
 - **Composants Magic UI** dans `src/components/ui/` : marquee, blur-fade, shimmer-button, border-beam,
   animated-list, number-ticker, dot-pattern, animated-beam, magic-card, bento-grid, hero-video-dialog,
-  typing-animation, animated-shiny-text. Mêmes noms et mêmes props que le registre `@magicui/*`, réécrits
+  typing-animation. Mêmes noms et mêmes props que le registre `@magicui/*`, réécrits
   sans la librairie `motion` (animations CSS natives, plus légères).
 - **Polices** Inter et Inter Display (licence OFL) auto-hébergées dans `public/fonts/` : aucun appel à Google Fonts.
 - **Couleurs** du logo : crème `#F9F6F0`, noir `#1A1A1A`, orange `#FF6600` réservé au signal (le carré).
   Tous les tokens sont en haut de `src/styles.css`.
+
+## Règles de design
+
+- **L'orange marque les signaux d'achat** (carrés allumés, puce `SignalSquare`) et le carré du logo.
+  Jamais pour un fond, un texte ou une bordure. Seules exceptions, sur le chemin de la demande :
+  l'étincelle du bouton principal et le liseré qui fait le tour du formulaire.
+- **Le bouton noir plein est réservé à l'action principale** (« Recevoir mon Radar offert »).
+  Les autres actions sont en contour (ex. `VideoTrigger`, qui ouvre la vidéo depuis n'importe où dans la page).
+- **Trois tailles de titre** (`src/styles.css`) : `display-hero` (le grand titre), `display-section`
+  (chaque titre de section), `display-sub` (les sous-titres). `lead` pour le paragraphe d'introduction.
+- **Repères de section** : `<Eyebrow step={n}>` au-dessus de chaque titre de section, numérotées de 1 à 7
+  dans l'ordre de la page (`src/components/brand.tsx`). Si tu ajoutes ou retires une section,
+  mets à jour `SECTION_COUNT` et les numéros.
+- **Coches** : `<CheckBadge />` (rondes et légères), pas de carrés noirs.
+- **Ombres** : `shadow-card` pour une carte posée, `shadow-float` pour les grandes pièces de démonstration.
+- **Une seule animation vedette** : le Radar du haut de page. Ailleurs, apparitions au défilement
+  et démonstrations utiles seulement. Tout s'arrête avec « réduire les animations ».
 
 ## Modifier un texte
 
