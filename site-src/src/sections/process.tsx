@@ -58,7 +58,7 @@ function Mechanism() {
         <Node ref={radar} label="Ton Radar" big>
           <Logo variant="symbolSmallDark" className="size-10 md:size-12" title="" />
         </Node>
-        <Node ref={inbox} label="Ta boîte mail" sub="sous 72 h">
+        <Node ref={inbox} label="Ta boîte mail" sub={"sous 72\u00A0h"}>
           <Icon.Inbox />
         </Node>
 
@@ -78,7 +78,7 @@ function Mechanism() {
 const STEPS = [
   { n: "01", stat: 2, unit: "min", title: "Tu remplis le formulaire", text: "Ton agence, ton offre, ton client idéal et ta zone." },
   { n: "02", stat: 10, unit: "prospects", title: "On construit ton Radar", text: "On repère les signaux sur ton marché, on identifie chaque décideur et on écrit les messages." },
-  { n: "03", stat: 72, unit: "h", title: "Tu le reçois par email", text: "Tes 10 prospects, leurs messages et la carte de ton marché." },
+  { n: "03", stat: 72, unit: "h", title: "Tu le reçois par email", text: "Tes 10\u00A0prospects, leurs messages et la carte de ton marché." },
 ];
 
 export function Process() {
@@ -93,34 +93,46 @@ export function Process() {
               <br />
               Aucun appel.
             </h2>
-            <p className="mt-6 max-w-[28em] text-[1.1rem] leading-relaxed text-fog md:text-[1.2rem]">
-              Tu remplis un formulaire. Tu reçois tes prospects. C'est tout.
-            </p>
+            <p className="lead mt-6 max-w-[28em] text-fog">Tu remplis un formulaire. Tu reçois tes prospects. C'est tout.</p>
           </BlurFade>
           <BlurFade inView direction="up" delay={0.1}>
             <Mechanism />
           </BlurFade>
         </div>
 
-        <ol className="mt-16 grid gap-px overflow-hidden rounded-[28px] bg-night-line ring-1 ring-night-line md:mt-20 md:grid-cols-3">
+        <ol className="mt-12 grid gap-px overflow-hidden rounded-[28px] bg-night-line ring-1 ring-night-line md:mt-20 md:grid-cols-3">
           {STEPS.map((s, i) => (
             <BlurFade as="li" key={s.n} inView direction="up" delay={0.08 * i} className="bg-night">
-              <div className="flex h-full flex-col gap-4 p-7 md:p-8">
-                <span className="label-mono text-fog-2">Étape {s.n}</span>
-                <p className="flex items-baseline gap-2 font-display leading-none font-extrabold tracking-[-0.05em]">
-                  <NumberTicker value={s.stat} className="text-[clamp(3.4rem,6vw,4.8rem)] tracking-[-0.05em]" delay={0.15 * i} />
-                  <span className="text-[1.15rem] font-bold tracking-[-0.02em] text-fog">{s.unit}</span>
+              {/* téléphone : le chiffre et l'étape sur une ligne ; à partir de md : une colonne par étape */}
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 p-6 md:flex md:h-full md:flex-col md:items-stretch md:gap-4 md:p-8">
+                <div className="relative col-start-2 row-start-1 flex items-center gap-3">
+                  {i > 0 && (
+                    // la flèche posée sur le filet qui sépare deux étapes
+                    <span
+                      aria-hidden
+                      className="absolute top-1/2 left-[calc(-2rem-0.5px)] hidden size-7 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-night text-fog ring-1 ring-night-line md:flex"
+                    >
+                      <Icon.Arrow className="size-3.5" />
+                    </span>
+                  )}
+                  <span className="label-mono text-fog-2">Étape {s.n}</span>
+                  {/* le fil qui mène à l'étape suivante */}
+                  {i < STEPS.length - 1 && <span aria-hidden className="-mr-8 hidden h-px flex-1 bg-night-line md:block" />}
+                </div>
+                <p className="col-start-1 row-start-1 flex items-baseline gap-2 font-display leading-none font-extrabold tracking-[-0.05em]">
+                  <NumberTicker value={s.stat} className="text-[2.9rem] tracking-[-0.05em] md:text-[clamp(3.4rem,6vw,4.8rem)]" delay={0.15 * i} />
+                  <span className="text-[1.05rem] font-bold tracking-[-0.02em] text-fog md:text-[1.15rem]">{s.unit}</span>
                 </p>
-                <h3 className="mt-2 text-[1.2rem] font-semibold tracking-[-0.015em]">{s.title}</h3>
-                <p className="text-[0.98rem] leading-relaxed text-fog">{s.text}</p>
+                <h3 className="col-span-2 mt-2 text-[1.15rem] font-semibold tracking-[-0.015em] md:text-[1.2rem]">{s.title}</h3>
+                <p className="col-span-2 text-[0.98rem] leading-relaxed text-fog">{s.text}</p>
               </div>
             </BlurFade>
           ))}
         </ol>
 
-        <div className="mt-14 flex flex-col gap-8 border-t border-night-line pt-10 md:flex-row md:items-center md:justify-between">
-          <p className="max-w-[32em] text-[1.15rem] leading-snug font-medium tracking-[-0.015em] md:text-[1.3rem]">
-            Même si tu ne vas pas plus loin, tu gardes les 10 prospects et les messages. Les conversations qu'ils
+        <div className="mt-12 flex flex-col gap-7 border-t border-night-line pt-9 md:mt-14 md:flex-row md:items-center md:justify-between md:gap-8 md:pt-10">
+          <p className="max-w-[32em] text-[1.15rem] leading-snug font-medium tracking-[-0.015em] text-balance md:text-[1.3rem]">
+            Même si tu ne vas pas plus loin, tu gardes les 10&nbsp;prospects et les messages. Les conversations qu'ils
             déclenchent sont à toi.
           </p>
           <ShimmerButton
@@ -128,7 +140,7 @@ export function Process() {
             background="#F9F6F0"
             shimmerColor="#FF6600"
             shimmerDuration="3.2s"
-            className="h-14 shrink-0 gap-2.5 self-start border-ink/10 px-7 text-[1.02rem] font-semibold text-ink md:self-auto"
+            className="h-14 w-full shrink-0 gap-2.5 border-ink/10 px-7 text-[1.02rem] font-semibold text-ink transition-[transform,box-shadow] hover:shadow-[0_0_0_5px_rgb(249_246_240/0.14)] sm:w-auto sm:self-start md:self-auto"
           >
             Recevoir mon Radar offert <Icon.Arrow />
           </ShimmerButton>

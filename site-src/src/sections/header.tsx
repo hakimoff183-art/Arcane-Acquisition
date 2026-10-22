@@ -25,8 +25,9 @@ export function SiteHeader() {
         scrolled ? "border-line bg-paper/85 backdrop-blur-xl backdrop-saturate-150" : "border-transparent bg-paper/0",
       )}
     >
-      <div className="wrap flex h-[68px] items-center justify-between gap-4">
-        <a href="#top" className="shrink-0 rounded-md" aria-label="Arcane Acquisition, retour en haut">
+      {/* sur grand écran, trois colonnes : la navigation reste au centre exact de la page */}
+      <div className="wrap flex h-[68px] items-center justify-between gap-4 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+        <a href="#top" className="shrink-0 justify-self-start rounded-md py-1" aria-label="Arcane Acquisition, retour en haut">
           <Logo className="h-9 w-auto" title="Arcane Acquisition" />
         </a>
         <nav aria-label="Sections de la page" className="hidden items-center gap-8 text-[0.92rem] font-medium text-ink-2 lg:flex">
@@ -38,7 +39,7 @@ export function SiteHeader() {
         </nav>
         <a
           href="#formulaire"
-          className="inline-flex h-10 shrink-0 items-center gap-2 rounded-full bg-ink px-4 text-[0.88rem] font-semibold whitespace-nowrap text-paper transition-colors hover:bg-ink/85"
+          className="inline-flex h-11 shrink-0 items-center gap-2 justify-self-end rounded-full bg-ink px-[1.125rem] text-[0.88rem] font-semibold whitespace-nowrap text-paper transition-colors hover:bg-ink/85"
         >
           <span className="hidden min-[375px]:inline">Recevoir mon Radar</span>
           <span className="min-[375px]:hidden">Mon Radar</span>

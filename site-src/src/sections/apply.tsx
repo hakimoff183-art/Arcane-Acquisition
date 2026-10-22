@@ -70,6 +70,7 @@ function TallyForm() {
 
   return (
     <>
+      {/* sans JavaScript, l'iframe resterait vide : seul le lien s'affiche */}
       <iframe
         ref={ref}
         data-tally-src={SITE.tallyEmbed}
@@ -77,54 +78,64 @@ function TallyForm() {
         width="100%"
         height={560}
         title="Demande de Radar"
-        className="w-full border-0"
+        className="hidden w-full border-0 [.js_&]:block"
       />
       <noscript>
-        <a href={SITE.tallyLink} className="inline-flex h-12 items-center rounded-full bg-ink px-6 font-semibold text-paper">
-          Ouvrir le formulaire
+        <a href={SITE.tallyLink} className="inline-flex h-12 items-center gap-2 rounded-full bg-ink px-6 font-semibold text-paper">
+          Ouvrir le formulaire <Icon.Arrow />
         </a>
       </noscript>
     </>
   );
 }
 
-const DEAL = ["Offert, sans carte bancaire", "Aucun appel, aucun engagement", "Tu gardes les 10 prospects, quoi qu'il arrive"];
+const DEAL = ["Offert, sans carte bancaire", "Aucun appel, aucun engagement", "Tu gardes les 10\u00a0prospects, quoi qu'il arrive"];
+
+/** Notre capacité réelle : cinq carrés identiques, un par Radar. Rien ne suggère des places prises ou restantes. */
+function Capacity() {
+  return (
+    <p className="mt-8 max-w-[36rem] border-t border-line-2 pt-6 text-[0.95rem] leading-relaxed text-ink-2 md:mt-10">
+      <strong className="mb-1 flex items-center gap-3 text-[1rem] font-semibold text-ink md:text-[1.02rem]">
+        <span aria-hidden className="flex gap-1">
+          {Array.from({ length: 5 }, (_, i) => (
+            <span key={i} className="size-2 rounded-[2px] bg-ink" />
+          ))}
+        </span>
+        5 Radars par semaine.
+      </strong>
+      C'est notre vraie capacité de production, pour garder chaque Radar fait main.
+    </p>
+  );
+}
 
 export function Apply() {
   return (
     <section id="formulaire" className="border-t border-line bg-paper-2 py-24 md:py-32">
-      <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
+      <div className="wrap grid gap-12 md:gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-20">
         <BlurFade inView direction="up" className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow step={7}>Ta demande</Eyebrow>
           <h2 className="display-section mt-4">
-            Reçois tes 10 prospects sous 72&nbsp;h.
+            Reçois tes 10&nbsp;prospects sous 72&nbsp;h.
           </h2>
-          <p className="mt-6 max-w-[30em] text-[1.1rem] leading-relaxed text-ink-2 md:text-[1.2rem]">
-            Remplis le formulaire. Si ton agence correspond, ton Radar arrive dans ta boîte mail sous 72 h. Sinon, on te le dit franchement.
+          <p className="lead mt-5 max-w-[30em] text-ink-2 md:mt-6">
+            Remplis le formulaire. Si ton agence correspond, ton Radar arrive dans ta boîte mail sous 72&nbsp;h. Sinon, on te le dit franchement.
           </p>
-          <ul className="mt-8 grid gap-3.5">
+          <ul className="mt-7 grid gap-3 md:mt-8">
             {DEAL.map((d) => (
-              <li key={d} className="flex items-center gap-3.5 text-[1.02rem] font-medium">
-                <CheckBadge />
-                {d}
+              <li key={d} className="flex items-start gap-3 text-[1rem] font-medium md:text-[1.02rem]">
+                <CheckBadge className="mt-px" />
+                <span className="text-balance">{d}</span>
               </li>
             ))}
           </ul>
-          <div className="mt-9 flex items-center gap-5 rounded-2xl border border-line bg-card p-5">
-            <span aria-hidden className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-ink font-display text-[1.9rem] font-extrabold tracking-[-0.04em] text-paper">
-              5
-            </span>
-            <p className="text-[0.95rem] leading-snug text-ink-2">
-              <strong className="block font-semibold text-ink">5 Radars par semaine.</strong>
-              C'est notre vraie capacité de production, pour garder chaque Radar fait main.
-            </p>
-          </div>
+          <Capacity />
         </BlurFade>
 
         <BlurFade inView direction="up" delay={0.08}>
-          <div className="relative rounded-[28px] bg-card p-6 shadow-[0_40px_80px_-50px_rgb(26_26_26/0.45)] ring-1 ring-line md:p-10">
-            <h3 className="font-display text-[1.6rem] leading-tight font-bold tracking-[-0.025em]">Ta demande de Radar</h3>
-            <p className="mt-1.5 mb-6 text-[0.95rem] text-ink-3">2 minutes. Les réponses servent à construire ton Radar.</p>
+          {/* sur téléphone, marges réduites : le formulaire garde toute la largeur possible */}
+          <div className="relative rounded-[28px] bg-card px-4 pt-6 pb-4 shadow-float ring-1 ring-line sm:p-8 md:p-10">
+            <h3 className="font-display text-[1.45rem] leading-tight font-bold tracking-[-0.025em] md:text-[1.6rem]">Ta demande de Radar</h3>
+            <p className="mt-1 mb-5 text-[0.95rem] text-ink-3 md:mt-1.5 md:mb-6">2 minutes. Les réponses servent à construire ton Radar.</p>
             <TallyForm />
             <BorderBeam size={240} duration={14} colorFrom="#FF6600" colorTo="#FFC7A1" borderWidth={1.5} delay={4} />
           </div>

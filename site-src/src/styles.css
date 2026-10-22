@@ -33,7 +33,6 @@
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
   --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
-  --animate-shiny-text: shiny-text 8s infinite;
   --animate-border-beam: border-beam calc(var(--duration) * 1s) infinite linear;
 
   @keyframes marquee {
@@ -52,10 +51,6 @@
     15%, 35% { transform: translateZ(0) rotate(90deg); }
     65%, 85% { transform: translateZ(0) rotate(270deg); }
     100% { transform: translateZ(0) rotate(360deg); }
-  }
-  @keyframes shiny-text {
-    0%, 90%, 100% { background-position: calc(-100% - var(--shiny-width)) 0; }
-    30%, 60% { background-position: calc(100% + var(--shiny-width)) 0; }
   }
   @keyframes border-beam {
     100% { offset-distance: 100%; }
@@ -193,23 +188,48 @@
 .js [data-radar]:not([data-ready]) [data-cell][data-lit] { width: 26%; height: 26%; background: var(--color-line-2); border-radius: 999px; animation: none; }
 .js [data-radar]:not([data-ready]) [data-ping] { display: none; }
 .js [data-radar]:not([data-ready]) [data-count] { visibility: hidden; }
+/* si le JavaScript ne démarre pas (data-armed jamais posé), la carte retrouve son état final, comme la liste */
+.js [data-radar]:not([data-ready]):not([data-armed]) [data-cell][data-lit] { animation: cell-fallback 0s 2.5s forwards; }
+.js [data-radar]:not([data-ready]):not([data-armed]) [data-count] { animation: count-fallback 0s 2.5s forwards; }
+@keyframes cell-fallback { to { width: 62%; height: 62%; background: var(--color-signal); border-radius: 22%; } }
+@keyframes count-fallback { to { visibility: visible; } }
 [data-ping] { animation: ping-ring 1.4s cubic-bezier(0, 0, 0.2, 1) both; }
 @keyframes ping-ring {
   0% { transform: scale(1); opacity: 0.55; }
   100% { transform: scale(3.2); opacity: 0; }
 }
-
-/* ------------------------------------------------------------------ vidéo : anneau du bouton lecture */
-@keyframes play-ring {
-  0% { transform: scale(1); opacity: 0.5; }
-  100% { transform: scale(1.7); opacity: 0; }
+/* Un balayage discret de la carte pendant la détection. Rendu seulement par le JavaScript
+   (absent du HTML statique), il s'efface quand tous les signaux sont allumés. */
+[data-scan] {
+  animation: radar-scan 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  transition: opacity 0.9s ease;
 }
-.play-ring { animation: play-ring 2.4s cubic-bezier(0, 0, 0.2, 1) infinite; }
+[data-scan="off"] { opacity: 0; animation-play-state: paused; }
+@keyframes radar-scan {
+  from { transform: translateX(-100%); }
+  80%, to { transform: translateX(300%); }
+}
+/* Page hydratée (data-armed) : la liste du Radar reste vide jusqu'au départ de l'animation. Sinon le repli
+   de 2,5 s, prévu si le JavaScript échoue, l'afficherait en entier puis la viderait sous les yeux au départ. */
+[data-radar][data-armed] [data-animated-list]:not([data-ready]) > * { animation: none; }
 
+/* ------------------------------------------------------------------ vidéo : la fenêtre */
 dialog[data-video-dialog] { padding: 0; border: 0; background: transparent; max-width: none; max-height: none; width: 100%; height: 100%; }
 dialog[data-video-dialog]::backdrop { background: rgb(26 26 26 / 0.82); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 dialog[data-video-dialog][open] [data-video-panel] { animation: dialog-in 0.35s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
 @keyframes dialog-in { from { opacity: 0; transform: translateY(24px) scale(0.96); } }
+/* Le panneau 4:3 tient toujours dans l'écran, bouton Fermer compris.
+   Écran en hauteur : le bouton au-dessus du panneau. Écran en largeur : à sa droite. */
+[data-video-stage] { container-type: size; padding: 1rem; }
+@media (min-width: 768px) and (min-height: 600px) { [data-video-stage] { padding: 2.5rem; } }
+[data-video-panel] { --close: 3.5rem; width: min(100cqw, (100cqh - 2 * var(--close)) * 4 / 3, 64rem); }
+[data-video-close] { z-index: 2; right: 0; bottom: calc(100% + 0.75rem); }
+@container (min-aspect-ratio: 4 / 3) {
+  [data-video-panel] { width: min(100cqw - 2 * var(--close), 100cqh * 4 / 3, 64rem); }
+  [data-video-close] { right: auto; bottom: auto; top: 0; left: calc(100% + 0.75rem); }
+}
+/* la page ne défile pas derrière la vidéo */
+html:has(dialog[data-video-dialog][open]) { overflow: hidden; }
 
 /* ------------------------------------------------------------------ typing caret */
 @keyframes caret { 50% { opacity: 0; } }
@@ -240,5 +260,6 @@ dialog[data-video-dialog][open] [data-video-panel] { animation: dialog-in 0.35s 
   }
   [data-blur-fade] { opacity: 1 !important; filter: none !important; transform: none !important; }
   [data-marquee-track] { animation: none !important; }
+  [data-scan] { display: none; }
   .animate-border-beam, [class*="after:animate-border-beam"]::after { display: none; }
 }
