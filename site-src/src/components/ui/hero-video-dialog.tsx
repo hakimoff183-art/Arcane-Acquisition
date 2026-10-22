@@ -99,7 +99,7 @@ export function HeroVideoDialog({
                 <path d="M18 6 6 18M6 6l12 12" />
               </svg>
             </button>
-            <div className="relative isolate z-[1] aspect-video overflow-hidden rounded-2xl bg-night ring-1 ring-paper/15">
+            <div className="relative isolate z-[1] mx-auto aspect-[4/3] max-h-[78vh] overflow-hidden rounded-2xl bg-night ring-1 ring-paper/15">
               {open && (
                 <iframe
                   src={videoSrc}
